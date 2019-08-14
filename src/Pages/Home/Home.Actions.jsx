@@ -7,7 +7,7 @@ const getPostsList = async dispatch => {
     const { payload } = result.body;
     dispatch({
       type: "GET_POST_LIST",
-      payload
+      payload,
     });
   }
 };

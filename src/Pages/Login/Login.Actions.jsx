@@ -1,19 +1,20 @@
 import axios from 'axios';
 import { success, error } from 'react-notification-system-redux';
 
-const registerUser = user => dispatch => {
+const loginUser = user => dispatch => {
    axios
-      .post("/api/v1/auth/users", user)
+      .post("/api/v1/auth/session", user)
       .then(response => {
          if (response && response.status === 200) {
+            const { token } = response.data.payload;
+            localStorage.setItem("user", token);
             dispatch({
-               type: "REGISTRATION_SUCCESS",
-               payload: true
+               type: "LOGIN_SUCCESS",
+               payload: { token }
             });
             dispatch(
                success({
-                  title: "Registration success",
-                  message: "Check your email for login link",
+                  title: "Login success",
                   position: "tc",
                   autoDismiss: 5
                })
@@ -23,7 +24,7 @@ const registerUser = user => dispatch => {
       .catch(err => {
          dispatch(
             error({
-               title: "Registration failed",
+               title: "Auth failed. Check your email or password.",
                message: err.response.data.error,
                position: "tc"
             })
@@ -31,4 +32,4 @@ const registerUser = user => dispatch => {
       });
 };
 
-export { registerUser };
+export { loginUser };

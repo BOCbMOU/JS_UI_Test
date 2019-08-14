@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-class Registration extends Component {
+// qwe@qwe.com
+
+class Login extends Component {
    state = {
-      username: "",
       email: "",
-      rehashedPassword: ""
+      hashedPassword: ""
    };
 
    onChange = event => {
@@ -23,27 +24,18 @@ class Registration extends Component {
          }
       }
 
-      this.props.registerUser(this.state);
+      this.props.loginUser(this.state);
    };
 
    render() {
-      const { isRegistered } = this.props;
+      const { user } = this.props;
 
-      if(isRegistered) {
-         return <Redirect to='/login' />
+      if (user.token) {
+         return <Redirect to="/" />;
       }
 
       return (
-         <form className='col-6 ml-auto mr-auto' onSubmit={this.onSubmit}>
-            <div className="form-group">
-               <label htmlFor="username">Username</label>
-               <input
-                  name="username"
-                  type="text"
-                  className="form-control"
-                  onChange={this.onChange}
-               />
-            </div>
+         <form className="col-6 ml-auto mr-auto" onSubmit={this.onSubmit}>
             <div className="form-group">
                <label htmlFor="email">Email</label>
                <input
@@ -54,20 +46,20 @@ class Registration extends Component {
                />
             </div>
             <div className="form-group">
-               <label htmlFor="rehashedPassword">Password</label>
+               <label htmlFor="hashedPassword">Password</label>
                <input
-                  name="rehashedPassword"
+                  name="hashedPassword"
                   type="password"
                   className="form-control"
                   onChange={this.onChange}
                />
             </div>
             <button type="submit" className="btn btn-success float-right">
-               Register
+               Login
             </button>
          </form>
       );
    }
 }
 
-export default Registration;
+export default Login;
