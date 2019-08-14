@@ -1,1 +1,1 @@
-export { default } from './Home.Controller';
+export { default } from './Home.Container';

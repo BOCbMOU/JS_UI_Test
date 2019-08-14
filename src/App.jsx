@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Pages/Home';
+import Registration from './Pages/Registration';
+import NotificationSystem from './Components/NotificationComponent';
 
 const App = () => {
    const f = () => void 0;
 
    return (
-      <Router>
-         <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/posts/" component={f} />
-            <Route path="/posts/:postId" component={f} />
-            <Route path="/about/" component={f} />
-            <Route path="/users/" component={f} />
-            <Route path="/users/self" component={f} />
-         </Switch>
-      </Router>
+      <Fragment>
+         <Router>
+            <Switch>
+               <Route path="/" exact component={Home} />
+               <Route path="/register" component={Registration} />
+               <Route path="/posts/" component={f} />
+               <Route path="/posts/:postId" component={f} />
+               <Route path="/about/" component={f} />
+               <Route path="/users/" component={f} />
+               <Route path="/users/self" component={f} />
+            </Switch>
+         </Router>
+         <NotificationSystem />
+      </Fragment>
    );
 };
 
