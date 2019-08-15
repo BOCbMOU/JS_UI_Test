@@ -1,15 +1,26 @@
 import axios from "axios";
+import { error } from "react-notification-system-redux";
 
-const getPostsList = async dispatch => {
-  const result = await axios.get("/api/v1/media/");
-  
-  if (result && result.status === 200) {
-    const { payload } = result.body;
-    dispatch({
-      type: "GET_POST_LIST",
-      payload,
+const getPostsList = ({ token }) => dispatch => {
+  axios
+    .get("/api/v1/media", { headers: { authorization: `Bearer ${token}` } })
+    .then(response => {
+      if (response && response.status === 200) {
+        dispatch({
+          type: "GET_MEDIA_LIST",
+          payload: {}
+        });
+      }
+    })
+    .catch(err => {
+      dispatch(
+        error({
+          title: "Auth failed, check email or password",
+          message: err.response.error,
+          position: "tc"
+        })
+      );
     });
-  }
 };
 
 export { getPostsList };

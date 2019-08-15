@@ -1,17 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Posts from "../Posts";
 
 class Home extends Component {
-    componentDidMount() {
-        // todo - implement get list of posts
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Home</h1>
-            </div>
-        );
-    }
+  render() {
+    return <Posts type={'search'} />;
+  }
 }
 
 export default Home;

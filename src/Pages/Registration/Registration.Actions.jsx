@@ -13,7 +13,7 @@ const registerUser = user => dispatch => {
             dispatch(
                success({
                   title: "Registration success",
-                  message: "Check your email for login link",
+                  message: "Confirm your Email",
                   position: "tc",
                   autoDismiss: 5
                })
